@@ -1,0 +1,23 @@
+version: '1.0'
+steps:
+    main_clone:
+        title: Cloning main repository...
+        type: git-clone
+        repo: 'codefresh-contrib/golang-sample-app'
+        revision: master
+        git: github
+
+    MyAppDockerImage:
+        title: Building Docker Image
+        type: build
+        image_name: my-golang-image
+        working_directory: ./
+        tag: full
+        dockerfile: Dockerfile`
+
+    CollectAllMyDeps:
+      title: Install dependencies
+      image: python:3.6.4-alpine3.6
+      commands:
+        - pip install .
+        - echo works
